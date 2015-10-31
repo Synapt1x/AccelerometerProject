@@ -5,17 +5,37 @@ Created by: Chris Cadonic
 For: BME 7022 (ECE 4610)
 Class Project
 ========================================
-MATLAB code for analyzing acceleration data
-measured by my android device.
-This is the main function that calls the helper functions
-for processing the signals, including calibration with
-test data and also running through real data.
+This function carries out the actual algorithm for counting
+the number of steps in a given signal.
+
+The input signal is passed in to 'countSteps' as the first
+input, 'data'. The params structure is naturally passed
+to the second input, and varargin allows for countSteps
+to be called with intent signalled to the program.
+
+If varargin is non-empty, then the signal passsed into
+the program as 'data' is test data. If varargin is empty,
+then the signal is experimental.
+IN:
+      --data:
+      The input data signal containing raw accelerometer data
+      --params:
+      Structure containing the parameters of the algorithm
+      --varargin:
+      empty if experimental signal
+OUT:
+      --numSteps:
+      The number of steps calculated by the algorithm given
+      the parameters found in 'params'
+      --mpf:
+      The calculated mean power frequency for the provided
+      input data signal
 %}
 
 % store all data from the input data set
-x_data = data(:,1);
-y_data = data(:,2);
-z_data = data(:,3);
+x_data = data(:,1); % x accel
+y_data = data(:,2); % y accel
+z_data = data(:,3); % z accel
 delta_t_data = data(:,4); % data contains only time steps
 t_data = [delta_t_data(1)]; % initialize time vector
 
@@ -41,7 +61,7 @@ for data_point=3:length(z_data_filt) % loop over each z data point
       end
 end
 
-if ~isempty(varargin) % if it is an experimental signal, plot it
+if isempty(varargin) % if it is an experimental signal, plot it
       % plot the raw signal
       figure(1)
       plot(t_data,z_data);

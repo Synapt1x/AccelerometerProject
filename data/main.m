@@ -25,7 +25,7 @@ params = setup;
 data = dlmread('exampleData.txt');
 
 % count the steps in this dataset
-[numSteps,mpf] = countSteps(data,params,'experimental');
+[numSteps,mpf] = countSteps(data,params);
 
 disp(['Number of steps counted: ', num2str(numSteps)]);
 

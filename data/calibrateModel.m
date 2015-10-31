@@ -5,11 +5,22 @@ Created by: Chris Cadonic
 For: BME 7022 (ECE 4610)
 Class Project
 ========================================
-MATLAB code for analyzing acceleration data
-measured by my android device.
-This is the main function that calls the helper functions
-for processing the signals, including calibration with
-test data and also running through real data.
+This function calibrates the model given the parameters
+in 'params'. This will be reading in test data and then 
+determining the number of steps each test signal is
+calculated to represent and contrasted to the 
+corresponding known value to calculate accuracy. The
+accuracy of the current setup is output during calibration.
+IN: 
+      --params:
+      Structure containing the parameters of the algorithm
+OUT:
+      --accuracy:
+      Vector containing the accuracy values for counting
+      the number of steps with each test signal.
+      --meanAcc:
+      An output float that represents the average accuracy
+      of the algorithm given the parameters in 'params'
 %}
 
 % get current working directory and change to test folder
@@ -36,7 +47,7 @@ for job=1:numel(file) % loop over each test file
       
       cd(curdir);
       % count the number of steps in this dataset
-      numSteps = countSteps(data, params);
+      numSteps = countSteps(data, params, 'calibrate');
 
       % accrue total steps counted for all files
       totSteps = totSteps + numSteps;

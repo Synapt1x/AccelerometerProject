@@ -5,11 +5,16 @@ Created by: Chris Cadonic
 For: BME 7022 (ECE 4610)
 Class Project
 ========================================
-MATLAB code for analyzing acceleration data
-measured by my android device.
-This is the main function that calls the helper functions
-for processing the signals, including calibration with
-test data and also running through real data.
+This function contains the setup function to control
+various characteristics for my BME 7022 project.
+
+Setup is called with the structure 'params' as output, 
+which henceforth carries all parameters of the project
+as parameters in the structure 'params'.
+OUT:
+      --params:
+      Output structure containing the parameters
+      for use in the number of steps calculating algorithm
 %}
 
 %% Signal Properties
