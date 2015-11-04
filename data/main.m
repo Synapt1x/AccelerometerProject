@@ -44,7 +44,7 @@ data = [];
 %% Experimental Data
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % load all files in experimental directory
-allFiles = dir(pwd);
+allFiles = dir('experimentalData');
 allFiles(1:2) = []; % remove . and .. directory commands
 
 for file = 1:numel(allFiles) % iterate over each signal found in the folder
@@ -53,6 +53,8 @@ for file = 1:numel(allFiles) % iterate over each signal found in the folder
       % count the steps in this file
       [numSteps,mpf] = countSteps(data,params);
       
+      disp(['The name of this file is :', allFiles(file).name, ...
+            ' which was recorded on ', allFiles(file).date, '.']);
       disp(['Number of steps counted: ', num2str(numSteps)]);
       
       % calculate confidence interval fo this calculation
