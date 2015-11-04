@@ -24,7 +24,7 @@ OUT:
 %}
 
 % get current working directory and change to test folder
-curdir = fileparts(which(mfilename));
+curDir = fileparts(which(mfilename));
 
 % store all filenames into a cell array
 file = {'Datastream3formatted-TwoSteps.txt', ...
@@ -45,7 +45,7 @@ for job=1:numel(file) % loop over each test file
       % read in the data in the current file
       data = dlmread(file{job});
       
-      cd(curdir);
+      cd(curDir);
       % count the number of steps in this dataset
       numSteps = countSteps(data, params, 'calibrate');
 
@@ -64,4 +64,4 @@ meanAcc = (1-mean(accuracy))*100;
 disp(['The overall accuracy of this algorithm is: ', num2str(meanAcc), ' %']);
 
 %change directory back to original directory
-cd(curdir); 
+cd(curDir); 
