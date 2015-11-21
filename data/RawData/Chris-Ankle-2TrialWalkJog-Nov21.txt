@@ -1,3 +1,11 @@
+# Accelerometer Values
+# filename:  Datastream__11.txt
+# Saving start time: Sat Nov 21 11:34:21 CST 2015
+
+# sensor resolution: 1.0m/s^2
+#Sensorvendor: Invensense, name: MPL accel, type: 1,version : 1, range 10240.0
+
+# X value, Y value, Z value, time diff in ms
 0.097 0.012 0.0 10
 -0.016 0.028 -0.111 9
 -0.087 0.027 -0.133 12
@@ -122820,3 +122828,5 @@
 -0.05 -0.052 0.189 10
 -0.064 -0.022 0.102 10
 0.081 0.011 -0.046 11
+# end
+#Sat Nov 21 11:54:53 CST 2015
