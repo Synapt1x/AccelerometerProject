@@ -52,7 +52,7 @@ z_data_filt = filtfilt(b,a,z_data); %apply the filter to the signal
 
 % analyze filtered signal for steps
 threshold = params.thresholdProportion*max(z_data_filt);
-for data_point=3:length(z_data_filt) % loop over each z data point
+for data_point=3:length(z_data_filt)-1 % loop over each z data point
       if (z_data_filt(data_point) > threshold) && ...
                   (z_data_filt(data_point) > z_data_filt(data_point-1)) && ...
                   (z_data_filt(data_point) > z_data_filt(data_point+1))
