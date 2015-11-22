@@ -44,11 +44,14 @@ data = [];
 %% Experimental Data
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % load all files in experimental directory
-allFiles = dir('experimentalData');
+allFiles = dir('Expdata');
 allFiles(1:2) = []; % remove . and .. directory commands
 
 for file = 1:numel(allFiles) % iterate over each signal found in the folder
+    
+      cd('Expdata');
       data = dlmread(allFiles(file).name);
+      cd('..');
       
       % count the steps in this file
       [numSteps,mpf] = countSteps(data,params);
