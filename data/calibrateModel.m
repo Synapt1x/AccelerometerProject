@@ -37,7 +37,7 @@ file = {'Datastream3formatted-TwoSteps.txt', ...
 realnum = [2, 21, 50, 96, 120, 34];
 
 % initialize variables
-[numSteps, totSteps, accuracy] = deal(0);
+[totSteps, accuracy] = deal(0);
 
 for job=1:numel(file) % loop over each test file
      
@@ -60,8 +60,6 @@ end
 % calculate overall accuracy of the algorithm setup
 accuracy = [accuracy, abs(totSteps-sum(realnum))/sum(realnum)];
 meanAcc = (1-mean(accuracy))*100;
-
-disp(['The overall accuracy of this algorithm is: ', num2str(meanAcc), ' %']);
 
 %change directory back to original directory
 cd(curDir); 

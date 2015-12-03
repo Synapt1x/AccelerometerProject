@@ -20,4 +20,3 @@ OUT:
 %% Signal Properties
 params.Fs = 100; % sampled at 100 Hz
 params.cutoffFrequency = 5/params.Fs;
-params.thresholdProportion = 1/5;
