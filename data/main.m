@@ -50,25 +50,36 @@ allFiles = dir('FullData/*.txt');
 
 for file = 1:numel(allFiles) % iterate over each signal found in the folder
     
+      filename = allFiles(file).name;
+      
       cd('FullData');
-      data = dlmread(allFiles(file).name);
+      data = dlmread(filename);
       cd('..');
+      
+      disp(['The name of this file is :', filename, ...
+                  ' which was recorded on ', allFiles(file).date, '.']);
+            
+      % extract the location of the accelerometer based on the file name
+      filenameParts = strsplit(filename,'-');
+      accelLocation = filenameParts(2);
       
       % first separate the signal in the text file into
       % the separate segments for light and heavy ambulation
-      dataSegs = waitfor(signalSplitter(params,data));
+      dataSegs = signalSplitter(params,data);
       
-      % count the steps in this file
-      [numSteps,mpf] = countSteps(data,params);
-      
-      disp(['The name of this file is :', allFiles(file).name, ...
-            ' which was recorded on ', allFiles(file).date, '.']);
-      disp(['Number of steps counted: ', num2str(numSteps)]);
-      
-      % calculate confidence interval fo this calculation
-      disp(['Thus the number of steps taken in this signal is ', ...
-            'between ', num2str(round(numSteps*(meanAcc/100))), ' and ', ...
-            num2str(round(numSteps*(100/meanAcc)))]);
-      disp(['The Mean Power Frequency (MPF) for this signal is ', ...
-            num2str(mpf*params.Fs/22), ' Hz']);      
+      for segment = 1:size(dataSegs,1)
+            % count the steps in this signal segment
+            numSteps = countSteps({dataSegs{segment,1:2}},params);
+            
+            % display segment number and info about this seg
+            disp(['For segment number ', num2str(segment), ', the exercise intensity is ', ...
+                  dataSegs{segment,3}, ' and the accelerometer was placed on the ', ...
+                  accelLocation{1}, '. The number of steps for this was calculated to be ', ...
+                  num2str(numSteps), '.']);
+            
+            % calculate confidence interval fo this calculation
+            disp(['Thus the number of steps taken in this segment is ', ...
+                  'between ', num2str(round(numSteps*(meanAcc/100))), ' and ', ...
+                  num2str(round(numSteps*(100/meanAcc)))]);
+      end
 end

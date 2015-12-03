@@ -1,4 +1,4 @@
-function [numSteps,mpf] = countSteps(data, params, varargin)
+function numSteps = countSteps(data, params, varargin)
 %{
 ========================================
 Created by: Chris Cadonic
@@ -32,7 +32,13 @@ OUT:
       input data signal
 %}
 
-[formattedData,t_data] = processData(params,data);
+if isempty(varargin) % if it is an experimental signal, then it is passed
+      %as a cell of form {time data, signal data}
+      t_data = data{1};
+      formattedData = data{2};
+else
+      [formattedData,t_data] = processData(params,data);
+end
 
 numSteps = 0;
 
@@ -59,16 +65,4 @@ if isempty(varargin) % if it is an experimental signal, plot it
       plot(t_data,formattedData);
       xlabel('Time (sec)'),ylabel('Acceleration (m/s^2)');
       title('Plot of Low-Pass Filtered Acceleration Data From The Z-Axis');
-
-      % plot PSD
-      [psd_zz,F_zz] = periodogram(formattedData,[],100);
-
-      figure(3)
-      plot(F_zz,psd_zz);
-      mpf = sum(F_zz.*psd_zz)/sum(psd_zz);
-      hold on
-      plot([mpf mpf],[0 max(psd_zz)],'r');
-      hold off
-      xlabel('Normalized Frequency'),ylabel('PSD (dB)');
-      title('Power Spectrum Estimate For The Acceleration Data');
 end

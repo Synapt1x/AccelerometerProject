@@ -17,8 +17,8 @@ counting steps or splitting the data.
 x_data = data(:,1); % x accel
 y_data = data(:,2); % y accel
 z_data = data(:,3); % z accel
-delta_t_data = data(:,4); % data contains only time steps
-t_data = [delta_t_data(1)/1000]; % initialize time vector in seconds
+delta_t_data = data(:,4)/1000; % data contains only time steps
+t_data = [delta_t_data(1)]; % initialize time vector in seconds
 
 % find euclidean magnitude of vector formed by x, y, z
 LinData = sqrt(x_data.^2 + y_data.^2 + z_data.^2);
